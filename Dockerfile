@@ -1,4 +1,4 @@
-# base image ready for puppet apply
+# base Ubuntu image ready for puppet apply
 
 FROM ubuntu:14.04
 MAINTAINER Jeff Braucher <jeff@braucher.net>
