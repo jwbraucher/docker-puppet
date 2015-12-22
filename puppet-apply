@@ -1,0 +1,9 @@
+#!/bin/bash
+
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin
+
+puppet apply \
+  --debug \
+  --detailed-exitcodes \
+  $@
+
