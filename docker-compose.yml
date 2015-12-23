@@ -1,2 +1,5 @@
 docker-puppet:
   build: .
+  hostname: puppet
+  volumes:
+   - .:/src
