@@ -11,16 +11,17 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # compilers and ruby
-RUN apt-get update && RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
   make \
   ruby \
   ruby-dev \
   git
 
 # puppet ruby gems
-RUN gem install --no-ri --no-rdoc puppet 
-RUN gem install --no-ri --no-rdoc librarian-puppet 
-RUN gem install --no-ri --no-rdoc deep_merge
+RUN gem install --no-ri --no-rdoc \
+  puppet \
+  deep_merge \
+  librarian-puppet
 
 # puppet-apply
 COPY ./puppet-apply /
