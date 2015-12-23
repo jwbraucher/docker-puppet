@@ -2,8 +2,10 @@
 
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin
 
-puppet apply \
+status = puppet apply \
   --debug \
   --detailed-exitcodes \
   $@
 
+
+exit ($status == 0 || $status == 2)
