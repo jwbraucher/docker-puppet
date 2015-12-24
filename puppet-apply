@@ -1,11 +1,15 @@
 #!/bin/bash
 
+# set path so we can find puppet
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin
 
-status = puppet apply \
+# run puppet verbosely, with good exit codes
+puppet apply \
   --debug \
+  --verbose \
   --detailed-exitcodes \
   $@
+status=$?
 
-
-exit ($status == 0 || $status == 2)
+# exit code of 0 or 2 means success in puppet
+(( $status == 0 || $status == 2 ))
