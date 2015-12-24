@@ -1,2 +1,4 @@
 yelp/docker-custodian:latest
+jwbraucher/docker-image:latest
 ubuntu:14.04
+jwbraucher/docker-puppet:latest
