@@ -1,5 +1,5 @@
 # project settings
-PROJECT=docker-image
+PROJECT=docker-puppet
 OWNER=jwbraucher
 MACHINE=DEV
 SHELL=/bin/bash
