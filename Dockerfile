@@ -1,25 +1,25 @@
 # base Ubuntu image ready for puppet apply
 
-FROM ubuntu:14.04
+FROM jwbraucher/docker-image
 MAINTAINER Jeff Braucher <jeff@braucher.net>
 
-# Set the locale and terminal
-ENV DEBIAN_FRONTEND noninteractive
-RUN locale-gen en_US.UTF-8  
-ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
-ENV LC_ALL en_US.UTF-8
+ENV PUPPET_VERSION '~>3'
+ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # compilers and ruby
 RUN apt-get update && apt-get install -y \
   make \
+  software-properties-common \
   ruby \
   ruby-dev \
   git
 
-# puppet ruby gems
+# puppet ruby gem
 RUN gem install --no-ri --no-rdoc \
-  puppet \
+  --version "${PUPPET_VERSION}" puppet
+
+# puppet tools ruby gems
+RUN gem install --no-ri --no-rdoc \
   deep_merge \
   librarian-puppet
 

@@ -35,7 +35,7 @@ cli:
 	@docker exec -it $(OWNER)/$(PROJECT) $(SHELL)
 
 bootcli:
-	@docker run -it --entrypoint=$(SHELL) $(OWNER)/$(PROJECT)
+	@docker run --rm -it --entrypoint=$(SHELL) $(OWNER)/$(PROJECT)
 
 env:
 	@docker-machine env $(MACHINE)
