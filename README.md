@@ -1,4 +1,4 @@
-# Puppet Docker 
+# Puppet Docker
 
 This is a sample project using Docker and Puppet to deploy Ubuntu Linux.
 
