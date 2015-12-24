@@ -1,0 +1,4 @@
+docker-puppet:
+  image: jwbraucher/docker-puppet
+  ports:
+    - "8080:8080"

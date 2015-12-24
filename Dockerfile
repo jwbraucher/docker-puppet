@@ -38,3 +38,4 @@ RUN gem install --no-ri --no-rdoc \
 # puppet-apply
 COPY ./puppet-apply /
 
+ENTRYPOINT ["/bin/bash"]
