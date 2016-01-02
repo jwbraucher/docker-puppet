@@ -11,11 +11,16 @@ TODO: Describe the installation process
 
 ## Usage
 
+# To build everything:
+make
+
+# To rebuild everything with no caches:
+make TARGET=rebuild
+
+# Other examples :
+make clean
 make machine
 make env
-make clean
-make rebuild
-
 make start SERVICE=db
 make stop SERVICE=db
 make cli SERVICE=db
