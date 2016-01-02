@@ -4,18 +4,7 @@ This is a sample project using Docker and Puppet to deploy Ubuntu Linux.
 
 ## Installation
 
-TODO: Describe the installation process
-
 ## Usage
-
-make env
-make build
-make rebuild
-make clean
-
-make start IMAGE=db
-make stop IMAGE=db
-make cli IMAGE=db
 
 ## Contributing
 

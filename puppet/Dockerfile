@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y \
 RUN gem install --no-ri --no-rdoc \
   --version "${PUPPET_VERSION}" puppet
 
-# puppet tools 
+# puppet tools
 RUN gem install --no-ri --no-rdoc \
   deep_merge \
   librarian-puppet
