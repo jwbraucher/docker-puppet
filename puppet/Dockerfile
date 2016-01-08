@@ -36,5 +36,5 @@ RUN gem install --no-ri --no-rdoc \
   librarian-puppet
 
 # puppet-apply
-COPY ./puppet-apply /
+COPY ./puppet/puppet-apply /
 ENTRYPOINT ['/puppet-apply']

@@ -1,19 +1,12 @@
-# Puppet Docker
+# Docker Puppet
 
-This is a sample project using Docker and Puppet to deploy Ubuntu Linux.
-
-## Installation
+This image is based off of ubuntu-upstart. It contains puppet, librarian-puppet, and the deep_merge rubygem.
 
 ## Usage
+/puppet-apply is the default entrypoint. This script runs puppet apply with verbose output and returns 0 if all manifests are applied successfully, non-zero otherwise.
 
-## Contributing
-
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+## Development
+See DEVELOPMENT.md
 
 ## License
-
 MIT license
