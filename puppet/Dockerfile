@@ -35,6 +35,9 @@ RUN gem install --no-ri --no-rdoc \
   deep_merge \
   librarian-puppet
 
+# Set TERM for root user
+RUN echo 'export TERM=xterm' >> ~/.bashrc
+
 # puppet-apply
 COPY ./puppet/puppet-apply /
 ENTRYPOINT ['/puppet-apply']
