@@ -13,6 +13,9 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
+# Fix terminal for the root user
+RUN echo 'export TERM=xterm' >> ~/.bashrc
+
 # Fix initctl on ubuntu image (hard-coded to 1.12.1 to go with Ubuntu 14.04)
 RUN dpkg-divert --local --rename --add /sbin/initctl
 RUN echo '#!/bin/bash\nif [ $1 == "--version" ]\nthen\n  echo "initctl (upstart 1.12.1)"\nfi\n/bin/true' > /sbin/initctl
