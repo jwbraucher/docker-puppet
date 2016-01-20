@@ -42,5 +42,5 @@ RUN gem install --no-ri --no-rdoc \
 RUN echo 'export TERM=xterm' >> ~/.bashrc
 
 # puppet-apply
-COPY ./puppet/puppet-apply /
+COPY ./puppet-apply /
 ENTRYPOINT ['/puppet-apply']

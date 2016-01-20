@@ -16,15 +16,19 @@ include Makefile.local
 .PHONY: $(image)
 $(image):
 	@for i in $(image); do \
-	  docker build --force-rm=true -t $${i} -f $${i}/Dockerfile . \
+	  cd $${i} ; \
+	  docker build --force-rm=true -t $${i} . \
 	  || exit $$? ; \
+	  cd .. ; \
 	  done
 
 .PHONY: rebuild
 rebuild:
 	@for i in $(image); do \
-	  docker build --force-rm=true -t $${i} -f $${i}/Dockerfile --no-cache . \
+	  cd $${i} ; \
+	  docker build --force-rm=true -t $${i} --no-cache . \
 	  || exit $$? ; \
+	  cd .. ; \
 	  done
 
 .PHONY: clean clean-containers clean-images clean-files
