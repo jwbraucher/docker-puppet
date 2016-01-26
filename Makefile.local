@@ -1,3 +1,2 @@
 # This file contains Makefile targets specific for this project
 app = puppet
-

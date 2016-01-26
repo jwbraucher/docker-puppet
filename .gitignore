@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 volumes/*/*
 volumes/*/*/
+=======
+volumes/**
+>>>>>>> app/latest
