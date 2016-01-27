@@ -54,6 +54,7 @@ clean-files:
 
 pull:
 	@echo "...Pulling image..."
+	docker pull braucher/$(app)
 	command=$@ docker-compose pull
 
 # container commands
