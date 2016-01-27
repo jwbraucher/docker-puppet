@@ -13,30 +13,33 @@ default: $(image)
 # Local Project Makefile
 include Makefile.local
 
+# Build the images (default behavior)
+# if "rebuild" target is added, build images with --no-cache
 .PHONY: $(image)
-$(image):
-	@for i in $(image); do \
-	  cd $${i} ; \
-	  docker build --force-rm=true -t $${i} . \
-	  || exit $$? ; \
-	  cd .. ; \
-	  done
+rebuild $(image):
+	@\
+nocache=`echo $@ | awk '/rebuild/ {printf "--no-cache"}'` ; \
+set -x ; \
+docker-compose build \
+  --force-rm \
+  $${nocache} \
 
-.PHONY: rebuild
-rebuild:
-	@for i in $(image); do \
-	  cd $${i} ; \
-	  docker build --force-rm=true -t $${i} --no-cache . \
-	  || exit $$? ; \
-	  cd .. ; \
-	  done
+# Clean up everything including all local images
+.PHONY: distclean
+distclean: stop clean
+	@ set -x ; \
+images=`docker images -q` ; \
+for i in $${images}; do \
+  docker rmi -f $${i} ; \
+  done
 
+# Image/Container/Data clean-up
 .PHONY: clean clean-containers clean-images clean-files
 clean: clean-containers clean-images clean-files
 
 clean-containers:
 	@echo "...Cleaning Containers..."
-	-command=$@ docker-compose rm -f -v $(image)
+	-command=$@ docker-compose rm -f -v
 	$(eval containers := $(shell docker ps -a -q --filter='status=exited') )
 	-@for container in ${containers}; do docker rm $${container}; done
 
@@ -49,6 +52,11 @@ clean-files:
 	@echo "...Cleaning Untracked Files (Git)..."
 	-git clean -xdf
 
+pull:
+	@echo "...Pulling image..."
+	command=$@ docker-compose pull
+
+# container commands
 .PHONY: start install
 start install:
 	command=$@ docker-compose up -d $(service)
@@ -66,18 +74,42 @@ status:
 
 .PHONY: logs
 logs:
-	$(eval container := $(shell command=$@ app=${app} ip=${ip} docker-compose ps -q $(service) | head -1) )
-	docker logs -f $(container)
+	@ set -x ; \
+export theservice="$${app}" ; \
+if [ ! -z "$${service}" ]; then \
+  theservice=$${service} ; \
+fi ; \
+container=`docker-compose ps -q $${theservice} 2>/dev/null` ; \
+docker logs -f $${container}
 
 .PHONY: cli
 cli:
-	$(eval container := $(shell command=$@ app=${app} ip=${ip} docker-compose ps -q $(service) | head -1) )
-	docker exec -it $(container) /bin/bash -o vi
+	@ set -x ; \
+export theservice="$${app}" ; \
+if [ ! -z "$${service}" ]; then \
+  theservice=$${service} ; \
+fi ; \
+container=`docker-compose ps -q $${theservice} 2>/dev/null` ; \
+docker exec -it $${container} /bin/bash -o vi
 
 .PHONY: start-cli
 start-cli:
-	command=$@ docker-compose run --rm --entrypoint /bin/bash $(service) -o vi
+	@ set -x ; \
+export theservice="$${app}" ; \
+if [ ! -z "$${service}" ]; then \
+  theservice=$${service} ; \
+fi ; \
+command=$@ docker-compose run --rm --entrypoint /bin/bash $${theservice} -o vi
 
+# run backup and restore
+.PHONY: backup restore configure
+backup restore configure:
+	@ set -x ; \
+command=$(@) ; \
+container=`docker-compose ps -q $${app} 2>/dev/null` ; \
+docker exec -it $${container} /app $${command}
+
+# manage docker machine
 .PHONY: machine
 machine:
 	-docker-machine create --driver virtualbox $(USER)
@@ -87,11 +119,13 @@ machine:
 machine-stop:
 	docker-machine stop $(USER)
 
+# Show environment command, and add to clipboard to setup local environment
 .PHONY: env
 env:
 	docker-machine env $(USER)
 	@-docker-machine env $(USER) | tail -1 | sed 's,^# ,,' | pbcopy
 
+# Show network connection information for running containers
 .PHONY: net
 net:
 	@echo "Network Configuration:"
