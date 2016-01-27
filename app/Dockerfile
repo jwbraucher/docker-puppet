@@ -38,6 +38,8 @@ RUN gem install --no-ri --no-rdoc \
   deep_merge \
   librarian-puppet
 
-# puppet-apply
+# puppet-apply, default manifests, default hiera
 COPY ./puppet-apply /
-ENTRYPOINT ['/puppet-apply']
+COPY ./puppet/ /puppet-default/
+ENV PUPPET_HOME /puppet-default
+ENTRYPOINT /puppet-apply

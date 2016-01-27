@@ -7,6 +7,7 @@ export puppet_dir="${PUPPET_HOME:-/puppet}"
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # Configure the system with puppet
+mkdir -p ${puppet_dir}
 cd ${puppet_dir}
 librarian-puppet install
 
@@ -18,8 +19,8 @@ puppet apply \
   --detailed-exitcodes \
   --modulepath=./modules \
   --hiera_config=./hiera.yaml \
-  . \
-status=$?
+  .
+status=${?}
 
 # exit code of 0 or 2 means success in puppet
-(( $status == 0 || $status == 2 ))
+(( ${status} == 0 || ${status} == 2 ))

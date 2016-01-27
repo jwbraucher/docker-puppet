@@ -1,4 +1,4 @@
-# Puppet Hiera Data
+# Puppet Hiera Data Load Hierarchy
 :yaml:
   :datadir: .
 :merge_behavior: deeper

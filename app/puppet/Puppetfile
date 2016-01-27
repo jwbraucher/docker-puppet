@@ -1,7 +1,6 @@
-## Runtime dependencies
-
+# Puppet Forge
 forge 'https://forgeapi.puppetlabs.com'
 
 # Modules
-mod 'puppetlabs/stdlib'
+# mod 'pupeptlabs/stdlib'
 

@@ -1,5 +1,5 @@
-# Manage app with puppet
-classes:
-  - stdlib
-
+# Puppet Hiera Data
+#
+# classes:
+#   - stdlib
 
