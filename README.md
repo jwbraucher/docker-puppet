@@ -1,4 +1,4 @@
-# braucher/puppet 1.2.0
+# braucher/puppet 1.3.0
 
 This image is based off of ubuntu-upstart. It contains puppet, librarian-puppet, and the deep_merge rubygem.
 

@@ -1,3 +1,8 @@
+# braucher/puppet 1.3.0
+
+## Features
+  - merged in brauher/app-1.4.1
+
 # braucher/puppet 1.2.0
 
 ## Features
