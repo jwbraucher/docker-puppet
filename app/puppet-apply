@@ -1,0 +1,26 @@
+#!/bin/bash -ex
+
+# By default build from /puppet
+export puppet_dir="${PUPPET_HOME:-/puppet}"
+
+# set path so we can find puppet
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Configure the system with puppet
+mkdir -p ${puppet_dir}
+cd ${puppet_dir}
+librarian-puppet install
+
+# run puppet verbosely, with good exit codes
+set +e
+puppet apply \
+  --debug \
+  --verbose \
+  --detailed-exitcodes \
+  --modulepath=./modules \
+  --hiera_config=./hiera.yaml \
+  .
+status=${?}
+
+# exit code of 0 or 2 means success in puppet
+(( ${status} == 0 || ${status} == 2 ))

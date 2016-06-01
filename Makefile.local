@@ -1,2 +1,2 @@
-# This file is for local Makefile targets specific to the project
-app = app
+# This file contains Makefile targets specific for this project
+app = puppet

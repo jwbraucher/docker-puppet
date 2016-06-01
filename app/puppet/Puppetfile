@@ -1,0 +1,6 @@
+# Puppet Forge
+forge 'https://forgeapi.puppetlabs.com'
+
+# Modules
+# mod 'pupeptlabs/stdlib'
+
