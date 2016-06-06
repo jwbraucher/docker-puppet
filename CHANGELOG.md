@@ -1,7 +1,11 @@
+# braucher/puppet 1.4.0
+  - merged in Makefile from braucher/app-2.2.1
+  - added apt-transport-https to support newer Ubuntu repos
+
 # braucher/puppet 1.3.0
 
 ## Features
-  - merged in brauher/app-1.4.1
+  - merged in braucher/app-1.4.1
 
 # braucher/puppet 1.2.0
 
