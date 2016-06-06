@@ -25,6 +25,7 @@ RUN chmod 755 /sbin/initctl
 RUN apt-get update && apt-get install -y \
   make \
   software-properties-common \
+  apt-transport-https \
   ruby \
   ruby-dev \
   git
